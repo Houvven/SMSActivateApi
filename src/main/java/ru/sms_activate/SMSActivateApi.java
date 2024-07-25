@@ -404,7 +404,7 @@ public class SMSActivateApi {
 
     try {
       String[] parts = responseFromServer.split(":");
-      int id = Integer.parseInt(parts[1]);
+      long id = Long.parseLong(parts[1]);
       long number = Long.parseLong(parts[2]);
 
       return new SMSActivateActivation(id, number, service);
@@ -588,7 +588,7 @@ public class SMSActivateApi {
    *                                            </ul>
    */
   @NotNull
-  public SMSActivateSetStatusResponse setStatus(int activationId, @NotNull SMSActivateClientStatus status)
+  public SMSActivateSetStatusResponse setStatus(long activationId, @NotNull SMSActivateClientStatus status)
     throws SMSActivateBaseException {
     return setStatusWithForwardPhone(activationId, status, null);
   }
@@ -660,7 +660,7 @@ public class SMSActivateApi {
    */
   @NotNull
   public SMSActivateSetStatusResponse setStatusWithForwardPhone(
-    int activationId,
+    long activationId,
     @NotNull SMSActivateClientStatus status,
     @Nullable Long forwardPhone
   ) throws SMSActivateBaseException {
@@ -705,7 +705,7 @@ public class SMSActivateApi {
    *                                            </ul>
    */
   @NotNull
-  public SMSActivateGetStatusResponse getStatus(int activationId) throws SMSActivateBaseException {
+  public SMSActivateGetStatusResponse getStatus(long activationId) throws SMSActivateBaseException {
     SMSActivateURLBuilder smsActivateURLBuilder = new SMSActivateURLBuilder(apiKey, SMSActivateAction.GET_STATUS);
     smsActivateURLBuilder.append(SMSActivateURLKey.ID, String.valueOf(activationId));
 
@@ -767,7 +767,7 @@ public class SMSActivateApi {
    *                                            </ul>
    */
   @NotNull
-  public SMSActivateGetFullSmsResponse getFullSms(int activationId) throws SMSActivateBaseException {
+  public SMSActivateGetFullSmsResponse getFullSms(long activationId) throws SMSActivateBaseException {
     SMSActivateURLBuilder smsActivateURLBuilder = new SMSActivateURLBuilder(apiKey, SMSActivateAction.GET_FULL_SMS);
     smsActivateURLBuilder.append(SMSActivateURLKey.ID, String.valueOf(activationId));
 
@@ -1018,7 +1018,7 @@ public class SMSActivateApi {
    *                                            </ul>
    */
   @NotNull
-  public SMSActivateActivation getAdditionalService(int parentActivationId, @NotNull String service) throws SMSActivateBaseException {
+  public SMSActivateActivation getAdditionalService(long parentActivationId, @NotNull String service) throws SMSActivateBaseException {
     SMSActivateURLBuilder smsActivateURLBuilder = new SMSActivateURLBuilder(apiKey, SMSActivateAction.GET_ADDITIONAL_SERVICE);
     smsActivateURLBuilder.append(SMSActivateURLKey.ID, String.valueOf(parentActivationId))
       .append(SMSActivateURLKey.SERVICE, service);
@@ -1387,7 +1387,7 @@ public class SMSActivateApi {
    * @throws SMSActivateUnknownException        if error type not documented.
    */
   @Nullable
-  public String waitSms(int activationId, int maxWaitMinutes) throws SMSActivateBaseException {
+  public String waitSms(long activationId, int maxWaitMinutes) throws SMSActivateBaseException {
     Calendar calendar = Calendar.getInstance();
     calendar.add(Calendar.MINUTE, maxWaitMinutes);
     SMSActivateGetStatusResponse statusResponse = getStatus(activationId);

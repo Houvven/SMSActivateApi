@@ -6,7 +6,7 @@ public class SMSActivateActivation {
   /**
    * Id activation.
    */
-  private final int activation;
+  private final long activation;
 
   /**
    * Phone number.
@@ -25,7 +25,7 @@ public class SMSActivateActivation {
    * @param number  phone number.
    * @param service service name.
    */
-  public SMSActivateActivation(int id, long number, @NotNull String service) {
+  public SMSActivateActivation(long id, long number, @NotNull String service) {
     this.activation = id;
     this.phone = number;
     this.service = service;
@@ -36,7 +36,7 @@ public class SMSActivateActivation {
    *
    * @return id activation.
    */
-  public int getId() {
+  public long getId() {
     return activation;
   }
 
